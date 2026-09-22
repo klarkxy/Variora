@@ -19,7 +19,7 @@ Open `app/index.html` in a browser. The picture scales with the window. Choose P
 
 ## Notes
 
-One HTML file. The shop, cat, robot, bowl, and clear umbrella are inline SVG. The noren is scalloped cloth, the umbrella is a ribbed dome, and the cat's arm is a shoulder, forearm, and paw on the bowl. Rain is redrawn in SVG coordinates so it stays aligned as the page scales. Steam, the cat's tail, the noren, and the puddle rings are SVG animations. The sign flickers with CSS.
+One HTML file. The shop, cat, robot, bowl, and clear umbrella are inline SVG. Rain is redrawn in SVG coordinates so it stays aligned as the page scales. Steam, the cat's tail, and the puddle rings are SVG animations. The sign flickers with CSS.
 
 Play rain builds a looping noise buffer, sends it through a band-pass filter, and adds two quiet sine tones. The button is the only control, because browsers block audio until a gesture.
 

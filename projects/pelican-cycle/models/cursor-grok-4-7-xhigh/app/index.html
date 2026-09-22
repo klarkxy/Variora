@@ -157,46 +157,55 @@
 
       <ellipse cx="450" cy="414" rx="150" ry="10" fill="#1c2428" opacity="0.16" />
 
-      <g id="far-leg" fill="none" stroke="#c45a28" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-        <polyline id="leg-b" points="452,318 470,340 424,392" />
-      </g>
-
-      <g id="bike" fill="none" stroke="#24312c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="336" cy="362" r="46" stroke-width="8" />
-        <circle cx="524" cy="362" r="46" stroke-width="8" />
+      <g id="bike" fill="none" stroke="#24312c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="348" cy="364" r="44" stroke-width="7" />
+        <circle cx="528" cy="364" r="44" stroke-width="7" />
         <g id="rear-spokes" stroke-width="2">
-          <line x1="336" y1="320" x2="336" y2="404" />
-          <line x1="294" y1="362" x2="378" y2="362" />
-          <line x1="306" y1="332" x2="366" y2="392" />
-          <line x1="306" y1="392" x2="366" y2="332" />
+          <line x1="348" y1="324" x2="348" y2="404" />
+          <line x1="308" y1="364" x2="388" y2="364" />
+          <line x1="320" y1="336" x2="376" y2="392" />
+          <line x1="320" y1="392" x2="376" y2="336" />
         </g>
         <g id="front-spokes" stroke-width="2">
-          <line x1="524" y1="320" x2="524" y2="404" />
-          <line x1="482" y1="362" x2="566" y2="362" />
-          <line x1="494" y1="332" x2="554" y2="392" />
-          <line x1="494" y1="392" x2="554" y2="332" />
+          <line x1="528" y1="324" x2="528" y2="404" />
+          <line x1="488" y1="364" x2="568" y2="364" />
+          <line x1="500" y1="336" x2="556" y2="392" />
+          <line x1="500" y1="392" x2="556" y2="336" />
         </g>
-        <circle cx="336" cy="362" r="7" fill="#24312c" stroke="none" />
-        <circle cx="524" cy="362" r="7" fill="#24312c" stroke="none" />
-        <path d="M336 362 L424 362" />
-        <path d="M336 362 L392 308" />
-        <path d="M392 308 L498 304" />
-        <path d="M424 362 L498 304" />
-        <path d="M498 304 L524 362" />
-        <path d="M392 308 L392 292" />
-        <path d="M374 292 h36" />
-        <path d="M486 304 L534 278 L552 292" />
-        <circle id="ring" cx="424" cy="362" r="18" />
+        <circle cx="348" cy="364" r="7" fill="#24312c" stroke="none" />
+        <circle cx="528" cy="364" r="7" fill="#24312c" stroke="none" />
+        <path d="M348 364 L430 364 L500 292 L396 300 L348 364" />
+        <path d="M430 364 L500 292" />
+        <path d="M500 292 L528 364" />
+        <path d="M396 300 L396 286" />
+        <path d="M378 286 h36" />
+        <path d="M500 292 L534 276 L548 292" />
+        <circle id="ring" cx="430" cy="364" r="16" />
+      </g>
+
+      <g id="crank" stroke="#24312c" stroke-width="4" stroke-linecap="round">
+        <line x1="430" y1="338" x2="430" y2="390" />
+        <rect x="418" y="334" width="22" height="7" fill="#e07a3d" stroke="none" />
+        <rect x="418" y="386" width="22" height="7" fill="#e07a3d" stroke="none" />
       </g>
 
       <g id="bird">
-        <path d="M390 300 q -36 8 -16 26 q 22 6 34 -8" fill="#d5e2ea" />
-        <ellipse cx="456" cy="286" rx="58" ry="36" fill="#f7f4ef" />
-        <path d="M430 270 Q 500 248 548 286 Q 470 292 430 278 Z" fill="#e7eef2" />
-        <path d="M500 270 Q 528 236 552 252" fill="none" stroke="#f7f4ef" stroke-width="16" stroke-linecap="round" />
-        <ellipse cx="564" cy="246" rx="22" ry="18" fill="#f7f4ef" />
-        <path d="M576 240 L748 226 L740 248 L582 258 Z" fill="#e07a3d" />
-        <path d="M708 232 L748 226 L740 248 L716 240 Z" fill="#c45a28" />
+        <path d="M400 318 q -30 10 -18 28 q 20 8 36 -6" fill="#d5e2ea" />
+        <ellipse cx="456" cy="304" rx="62" ry="40" fill="#f7f4ef" />
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-5 470 300; 7 470 300; -5 470 300"
+            dur="1.6s"
+            repeatCount="indefinite"
+          />
+          <path d="M470 292 Q 530 270 575 308 Q 520 318 468 308 Z" fill="#e7eef2" />
+        </g>
+        <path d="M500 286 Q 530 246 548 262" fill="none" stroke="#f7f4ef" stroke-width="16" stroke-linecap="round" />
+        <ellipse cx="560" cy="258" rx="24" ry="20" fill="#f7f4ef" />
+        <path d="M572 252 L742 236 L734 258 L578 270 Z" fill="#e07a3d" />
+        <path d="M700 242 L742 236 L734 258 L708 252 Z" fill="#c45a28" />
         <g>
           <animateTransform
             attributeName="transform"
@@ -205,23 +214,19 @@
             dur="1.4s"
             repeatCount="indefinite"
           />
-          <path d="M584 256 Q 660 312 724 262 Q 650 286 584 264 Z" fill="#f0b48a" />
+          <path d="M578 270 Q 650 328 710 274 Q 640 300 578 278 Z" fill="#f0b48a" />
         </g>
-        <circle cx="552" cy="240" r="4.2" fill="#1c2428" />
-        <circle cx="553.4" cy="238.6" r="1.3" fill="#fffaf4" />
+        <circle cx="548" cy="252" r="4.5" fill="#1c2428" />
+        <circle cx="549.5" cy="250.5" r="1.4" fill="#fffaf4" />
+        <path d="M430 292 q 20 -28 8 -8" fill="none" stroke="#d5e2ea" stroke-width="8" stroke-linecap="round" />
       </g>
 
-      <g id="crank" stroke="#24312c" stroke-width="4" stroke-linecap="round">
-        <line x1="424" y1="332" x2="424" y2="392" />
-        <rect x="412" y="326" width="24" height="8" rx="2" fill="#e07a3d" stroke="none" />
-        <rect x="412" y="388" width="24" height="8" rx="2" fill="#e07a3d" stroke="none" />
+      <g id="legs" fill="none" stroke="#e07a3d" stroke-width="7" stroke-linecap="round">
+        <polyline id="leg-a" points="446,330 470,348 430,338" />
+        <polyline id="leg-b" points="446,330 470,360 430,390" />
       </g>
-
-      <g id="near-leg" fill="none" stroke="#e07a3d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <polyline id="leg-a" points="452,318 478,348 424,332" />
-      </g>
-      <ellipse id="foot-b" cx="424" cy="392" rx="16" ry="7" fill="#c45a28" />
-      <ellipse id="foot-a" cx="424" cy="332" rx="16" ry="7" fill="#e07a3d" />
+      <ellipse id="foot-a" cx="430" cy="338" rx="14" ry="6" fill="#e07a3d" />
+      <ellipse id="foot-b" cx="430" cy="390" rx="14" ry="6" fill="#e07a3d" />
     </svg>
     <script>
       (function () {
@@ -235,17 +240,11 @@
         var legB = document.getElementById("leg-b");
         var footA = document.getElementById("foot-a");
         var footB = document.getElementById("foot-b");
-        var hx = 452;
-        var hy = 318;
-        var cx = 424;
-        var cy = 362;
-        var radius = 30;
-
-        function kneePoints(fx, fy) {
-          var kx = (hx + fx) / 2 + 22;
-          var ky = (hy + fy) / 2 - 16;
-          return hx + "," + hy + " " + kx + "," + ky + " " + fx + "," + fy;
-        }
+        var hx = 446;
+        var hy = 330;
+        var cx = 430;
+        var cy = 364;
+        var radius = 26;
 
         function syncMotion() {
           if (motion.matches) scene.pauseAnimations();
@@ -255,16 +254,22 @@
         function pose(angle) {
           var deg = (angle * 180) / Math.PI;
           var wheel = deg * 2.4;
-          rear.setAttribute("transform", "rotate(" + wheel + " 336 362)");
-          front.setAttribute("transform", "rotate(" + wheel + " 524 362)");
-          ring.setAttribute("transform", "rotate(" + deg + " 424 362)");
-          crank.setAttribute("transform", "rotate(" + deg + " 424 362)");
+          rear.setAttribute("transform", "rotate(" + wheel + " 348 364)");
+          front.setAttribute("transform", "rotate(" + wheel + " 528 364)");
+          ring.setAttribute("transform", "rotate(" + deg + " 430 364)");
+          crank.setAttribute("transform", "rotate(" + deg + " 430 364)");
           var ax = cx + Math.sin(angle) * radius;
           var ay = cy - Math.cos(angle) * radius;
           var bx = cx + Math.sin(angle + Math.PI) * radius;
           var by = cy - Math.cos(angle + Math.PI) * radius;
-          legA.setAttribute("points", kneePoints(ax, ay));
-          legB.setAttribute("points", kneePoints(bx, by));
+          legA.setAttribute(
+            "points",
+            hx + "," + hy + " " + (hx + ax) / 2 + 14 + "," + ((hy + ay) / 2 - 6) + " " + ax + "," + ay,
+          );
+          legB.setAttribute(
+            "points",
+            hx + "," + hy + " " + (hx + bx) / 2 + 14 + "," + ((hy + by) / 2 - 6) + " " + bx + "," + by,
+          );
           footA.setAttribute("cx", ax);
           footA.setAttribute("cy", ay);
           footB.setAttribute("cx", bx);

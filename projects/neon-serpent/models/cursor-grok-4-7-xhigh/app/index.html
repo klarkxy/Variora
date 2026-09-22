@@ -54,38 +54,28 @@
         inset: 0;
         z-index: 3;
         display: grid;
-        place-items: center;
-        background: rgba(8, 4, 14, 0.45);
+        place-items: end start;
+        padding: 28px;
+        background: linear-gradient(90deg, rgba(10, 4, 16, 0.78), rgba(10, 4, 16, 0.15) 70%);
       }
 
       #veil[hidden] {
         display: none;
       }
 
-      .sign {
-        width: min(300px, calc(100vw - 48px));
-        padding: 26px 22px 20px;
-        background: rgba(18, 8, 22, 0.92);
-        border-left: 4px solid #ff2d87;
-        border-right: 4px solid #ffb020;
-      }
-
       #veil h1 {
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         font-family: "Yu Mincho", Georgia, serif;
-        font-size: 36px;
+        font-size: 44px;
         font-weight: 500;
         color: #ffd7a8;
       }
 
       #veil p {
         margin: 0 0 10px;
+        max-width: 36em;
         line-height: 1.45;
         font-size: 16px;
-      }
-
-      #tally:empty {
-        display: none;
       }
 
       button {
@@ -127,17 +117,16 @@
     <canvas id="map" width="148" height="148" aria-hidden="true"></canvas>
     <div class="hud" aria-live="polite">
       <p id="score">Score 0</p>
-      <p id="length">Length 10</p>
+      <p id="length">Length 16</p>
     </div>
     <div class="steer">
       <button type="button" id="left">Left</button>
       <button type="button" id="right">Right</button>
     </div>
     <div id="veil">
-      <div class="sign">
-        <h1 id="title">Neon Serpent</h1>
-        <p id="blurb">Eat the teal lights. The amber body grows behind the head. Walls and your own trail end the run.</p>
-        <p id="tally"></p>
+      <div>
+        <h1>Neon Serpent</h1>
+        <p id="blurb">Eat the teal lights. The trail behind you grows. Walls and your own body end the run.</p>
         <p>Turn with the mouse, or with A and D. Click the street for mouse steering.</p>
         <button type="button" id="start">Start</button>
       </div>
