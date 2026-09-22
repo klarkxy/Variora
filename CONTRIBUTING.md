@@ -12,23 +12,36 @@ To add a project, use the [project template](templates/project/). Keep the share
 
 ## Contribute an implementation
 
+The rules in this section apply to model implementations under `projects/`. Website, infrastructure, and documentation changes follow the [general pull request requirements](#submit-a-pull-request); they are not subject to the original-result preservation policy. Model records may be completed or corrected while preserving an accurate account of the original output and run history.
+
 Follow the [model implementation rules](projects/AGENTS.md) and use the [model record template](templates/model/README.md). Place the implementation in `projects/<project>/models/<model>/app/` and link it from the project README.
 
-We prioritize submissions with higher confidence in their provenance and reproducibility. For the same project and model, a submission with more complete run details and parameters may replace an older, incomplete record. Please avoid duplicate submissions when the differences are minor. If you observe a significant difference, open an issue with the comparison and relevant run details.
+Use a separate branch and PR for each model implementation in each project, even when using the same model across projects. Keep the implementation's record, optional screenshots, and project README link in that PR.
+
+We collect one implementation per model per project, including across different harnesses. A submission with more complete provenance, run details, and parameters may replace an older, incomplete record. To discuss significant differences between runs, open an issue with the comparison and relevant run details.
 
 ### Keep comparisons controlled
 
 - Use the same shared prompt and starting inputs. Keep the harness, available tools, skills, resource limits, and other run conditions consistent where possible, so the model is the variable being compared.
 - Record differences that cannot be held constant, including reasoning settings or provider restrictions. Explain which conditions changed rather than attributing every difference in the output to the model.
 - Record follow-up instructions, retries, manual edits, and help from other models. If you select one result from multiple attempts, state how many attempts were made and how the result was selected.
-- Preserve the independence required by the model implementation rules. Improvements to an existing result should identify the original run and the subsequent assistance.
+- Preserve the independence required by the model implementation rules.
 
 Different setups are welcome when their differences are disclosed. They should not be described as a controlled model-only comparison.
+
+### Preserve the original result
+
+Preserve the result when the original task run ends, including its mistakes and limitations. The model may autonomously inspect and iterate on its work during that run. Later feedback from people or other models should be recorded as known issues rather than used to improve the generated code, visuals, or behavior, whether or not a PR has been opened.
+
+An entirely unusable result may receive the minimum repair needed to load, start, or enter its core interaction. Stop once basic operation is restored. Visual flaws, incomplete requirements, and bugs that do not prevent basic use remain part of the result; this exception does not permit polishing, tuning, or adding features.
+
+For a repair, link the original commit or preserved artifact in the model record. Record the original failure, each repair attempt and its changes, the assistance used, the total attempt count, and the outcome. Label the result as repaired and identify whether each screenshot shows the original or repaired version. Retain the original failure in the record even if the repair succeeds.
 
 ### Make results verifiable
 
 - Provide the actual source and enough setup and run instructions for another person to run the submitted result, including required dependencies and environment details.
 - Record the exact model ID, provider, harness, and assistance used. Use `none` when absent and `unknown` when information is unavailable; do not guess.
+- Check available logs, settings, and version information first. Before submitting, agents must ask their user about any unresolved Model, Provider, Harness, or Reasoning effort fields; explain any information that remains unknown.
 - Include the prompt revision and relevant settings needed to repeat the procedure. Model generation may vary between runs; reproducibility means a traceable procedure and runnable result, not a promise of identical generated output.
 - Report checks you actually performed, their results, and known failures or limitations. Label expectations and untested claims clearly.
 - Screenshots and measurements must come from the submitted implementation. For measurements, include the method and conditions; retain failures that affect the interpretation rather than presenting only favorable evidence.
