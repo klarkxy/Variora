@@ -19,7 +19,7 @@ Open `app/index.html` in a browser. The coast moves past the pelican on its own.
 
 ## Notes
 
-One HTML file. Clouds, hills, water, and the path are duplicated tiles translated in SVG units, so the loop does not depend on the window size. The wheels, chainring, and feet share one pedal cycle. The wing and the pouch move on their own.
+One HTML file. Clouds, hills, water, and the path are duplicated tiles translated in SVG units, so the loop does not depend on the window size. The bicycle is a diamond frame. The wheels, chainring, and both feet share one pedal cycle, with the knees bending between the hip and the pedals. The pouch moves on its own.
 
 The prompt does not ask for tests. The page was still opened in Cursor's browser at a desktop width to confirm the shore scrolls and the pelican keeps pedaling. Screenshot: `screenshots/coast.png`.
 

@@ -171,15 +171,41 @@
         </g>
 
         <g fill="#c4374a">
-          <rect x="180" y="296" width="112" height="72" />
-          <rect x="304" y="296" width="112" height="72" />
-          <rect x="428" y="296" width="112" height="72" />
-          <rect x="552" y="296" width="100" height="72" />
-        </g>
-        <g fill="#f7efe6">
-          <circle cx="360" cy="340" r="16" />
-          <circle cx="360" cy="340" r="8" fill="#c4374a" />
-          <circle cx="478" cy="348" r="10" />
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="-1.5 230 296; 1.5 230 296; -1.5 230 296"
+              dur="3.2s"
+              repeatCount="indefinite"
+            />
+            <path d="M180 296 h100 v46 q -25 18 -50 2 q -25 16 -50 -2 z" />
+            <path d="M230 300 v36" fill="none" stroke="#9a2430" stroke-width="2" />
+          </g>
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="1.2 360 296; -1.4 360 296; 1.2 360 296"
+              dur="2.8s"
+              repeatCount="indefinite"
+            />
+            <path d="M304 296 h112 v44 q -28 20 -56 0 q -28 18 -56 0 z" />
+            <circle cx="360" cy="328" r="14" fill="#f7efe6" />
+            <circle cx="360" cy="328" r="7" />
+          </g>
+          <g>
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="-1 478 296; 1.6 478 296; -1 478 296"
+              dur="3.4s"
+              repeatCount="indefinite"
+            />
+            <path d="M428 296 h104 v48 q -26 16 -52 0 q -26 18 -52 0 z" />
+            <path d="M480 300 v34" fill="none" stroke="#9a2430" stroke-width="2" />
+          </g>
+          <path d="M544 296 h108 v42 q -27 16 -54 0 q -27 14 -54 0 z" />
         </g>
       </g>
 
@@ -267,7 +293,7 @@
         <line x1="840" y1="330" x2="840" y2="308" stroke="#9aa7b6" stroke-width="3" />
         <circle cx="840" cy="302" r="7" fill="#ff5d92" filter="url(#glow)" class="flicker" />
         <path
-          d="M788 430 C 770 390, 800 330, 840 286"
+          d="M788 430 C 760 390, 790 360, 818 334"
           fill="none"
           stroke="#c5d0dc"
           stroke-width="14"
@@ -345,44 +371,45 @@
         </g>
       </g>
       <g id="serve">
-        <path
-          d="M505 472 C 560 492, 610 488, 648 472"
-          fill="none"
-          stroke="#a85a30"
-          stroke-width="22"
-          stroke-linecap="round"
-        />
-        <path
-          d="M505 472 C 560 492, 610 488, 648 472"
-          fill="none"
-          stroke="#e39a55"
-          stroke-width="16"
-          stroke-linecap="round"
-        />
-        <ellipse cx="654" cy="470" rx="15" ry="11" fill="#f3d3b4" />
+        <path d="M488 452 C 520 468, 548 486, 572 490 C 548 474, 522 458, 494 448 Z" fill="#c56b34" />
+        <path d="M496 450 C 524 464, 550 480, 570 484 C 548 470, 524 456, 500 448 Z" fill="#e39a55" />
+        <circle cx="572" cy="486" r="9" fill="#c56b34" />
+        <path d="M558 472 C 600 508, 640 492, 668 470 C 636 456, 596 468, 558 460 Z" fill="#e39a55" />
+        <ellipse cx="670" cy="468" rx="18" ry="12" fill="#f3d3b4" />
+        <circle cx="658" cy="462" r="3.4" fill="#e8b89a" />
+        <circle cx="668" cy="458" r="3.4" fill="#e8b89a" />
+        <circle cx="678" cy="464" r="3.2" fill="#e8b89a" />
       </g>
 
       <g id="umbrella">
-        <line x1="868" y1="214" x2="868" y2="300" stroke="#d7ebf8" stroke-width="4" />
-        <ellipse cx="868" cy="228" rx="132" ry="36" fill="rgba(255,255,255,0.14)" stroke="#e8f6ff" stroke-width="3" />
-        <path d="M736 228 Q 868 196 1000 228" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" />
-        <g stroke="rgba(214,236,250,0.55)" stroke-width="1.3">
-          <line x1="868" y1="228" x2="736" y2="228" />
-          <line x1="868" y1="228" x2="770" y2="210" />
-          <line x1="868" y1="228" x2="814" y2="196" />
-          <line x1="868" y1="228" x2="868" y2="190" />
-          <line x1="868" y1="228" x2="922" y2="196" />
-          <line x1="868" y1="228" x2="966" y2="210" />
-          <line x1="868" y1="228" x2="1000" y2="228" />
+        <path
+          d="M720 292 C 734 168, 946 168, 960 292 C 900 270, 780 270, 720 292 Z"
+          fill="rgba(214, 236, 255, 0.2)"
+          stroke="#f4fbff"
+          stroke-width="3"
+        />
+        <path
+          d="M720 292 Q 760 312 800 292 Q 840 314 880 292 Q 920 314 960 292"
+          fill="rgba(255,255,255,0.12)"
+          stroke="#f4fbff"
+          stroke-width="2"
+        />
+        <g stroke="rgba(244, 251, 255, 0.7)" stroke-width="1.4">
+          <line x1="840" y1="186" x2="720" y2="292" />
+          <line x1="840" y1="186" x2="770" y2="250" />
+          <line x1="840" y1="186" x2="840" y2="292" />
+          <line x1="840" y1="186" x2="910" y2="250" />
+          <line x1="840" y1="186" x2="960" y2="292" />
         </g>
-        <ellipse cx="868" cy="188" rx="6" ry="4" fill="#f4fbff" />
-        <g fill="rgba(255,255,255,0.8)">
-          <circle cx="790" cy="220" r="2.4" />
-          <circle cx="834" cy="206" r="2" />
-          <circle cx="902" cy="204" r="2.2" />
-          <circle cx="948" cy="218" r="1.8" />
+        <ellipse cx="840" cy="178" rx="7" ry="5" fill="#f4fbff" />
+        <line x1="840" y1="186" x2="824" y2="328" stroke="#d7ebf8" stroke-width="4" stroke-linecap="round" />
+        <ellipse cx="822" cy="332" rx="12" ry="8" fill="#eef3f8" />
+        <g fill="rgba(255,255,255,0.85)">
+          <circle cx="760" cy="286" r="2.4" />
+          <circle cx="812" cy="268" r="2" />
+          <circle cx="888" cy="266" r="2.2" />
+          <circle cx="934" cy="284" r="1.8" />
         </g>
-        <ellipse cx="848" cy="292" rx="11" ry="8" fill="#eef3f8" />
       </g>
 
       <g mask="url(#reflect-mask)" opacity="0.85">

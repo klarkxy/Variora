@@ -21,8 +21,8 @@ Three.js r170 is in `app/vendor/three.min.js`. That release has no separate UMD 
 
 ## Notes
 
-The camera sits at the snake's eyes. A short visor marks the nose. The body is the trail behind you, also drawn on the corner map. Length starts at 16 and grows by 4 each light. Buildings, the outer wall, and the torii posts block the way. Crossing the older part of the trail ends the run.
+The camera rides just behind the head, high enough to keep the amber body in the street. A cyan visor marks the head. Length starts at 10 and grows by 6 each light. The corner map shows the whole trail. Buildings, the outer wall, and the torii posts block the way. Crossing the older part of the trail ends the run. A centered sign says the run is over.
 
 Buildings, windows, and trim are made in code. No image or audio files are fetched. Start begins a quiet two-note bed. Eating a light plays a short tone. A hit plays a noise burst.
 
-Checked in Cursor's browser at a desktop width: the city renders, Start begins the run, eating teal lights raises the score and the length, and driving into a building opens Run again. Run again starts a fresh run. The corner map shows the trail. A sandboxed iframe with `allow-scripts` and `allow-pointer-lock`, the same permissions as the site preview, also rendered the street and the Start control. Screenshot: `screenshots/street.png`.
+Checked in Cursor's browser at a desktop width: the body is visible down the street, Start begins the run, eating a teal light moves the length from 10 to 16, and driving into a building opens the run-over sign. Holding a turn in the wide streets does not end the run immediately. Screenshot: `screenshots/street.png`.
