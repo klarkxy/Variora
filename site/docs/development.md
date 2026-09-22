@@ -59,6 +59,10 @@ test the static export on desktop and mobile views. Loading checks cover relativ
 `.mjs` imports, missing entry or dependency CORS headers, incorrect MIME types,
 classic scripts, and parent isolation.
 
+Comment checks use lightweight preview fixtures and a local Giscus stub to verify
+discussion mapping, language changes, and theme messages, including delayed widget
+loads. They do not depend on the hosted Giscus service or GitHub availability.
+
 The fixture export is removed afterward. Run `npm run build` afterward to produce
 a deployable export. `VARIORA_PROJECTS_DIR` overrides the catalog input directory
 for isolated test builds.

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures/giscus";
 import catalog from "../../.generated/catalog.json";
 
 for (const [locale, heading, lang] of [

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { projects, modelSource } from "@/lib/catalog";
 import { messages, type Locale } from "@/lib/i18n";
 import { Arrow } from "./icons";
+import { Comments } from "./comments";
 
 export function Preview({ locale }: { locale: Locale }) {
   const query = useSearchParams();
@@ -94,6 +95,10 @@ export function Preview({ locale }: { locale: Locale }) {
         />
       </div>
       {error && <p role="status">{error}</p>}
+      <section className="comments" aria-labelledby="comments-title">
+        <h2 id="comments-title">{t.comments}</h2>
+        <Comments term={`${project.id}/${model.id}`} locale={locale} />
+      </section>
     </>
   );
 }

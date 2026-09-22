@@ -1,5 +1,6 @@
 import { createServer, type Server } from "node:http";
-import { test, expect, type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+import { test, expect } from "./fixtures/giscus";
 
 const preview = "/en/preview/?project=rainy-ramen&model=e2e-fixture";
 const assets = "/previews/rainy-ramen/e2e-fixture";
@@ -49,7 +50,7 @@ test.afterAll(async () => {
 });
 
 async function openControl(page: Page, file: string) {
-  await page.locator("iframe").evaluate((frame, src) => {
+  await page.locator(".preview-container iframe").evaluate((frame, src) => {
     (frame as HTMLIFrameElement).src = src;
   }, `${controls}/${file}`);
 }
@@ -74,11 +75,11 @@ test("module entries and relative .mjs imports run with parent isolation", async
     expect((await response.request().allHeaders()).origin).toBe("null");
   }
   await expect(page).toHaveTitle("E2E fixture - Rainy Ramen - Variora");
-  await expect(page.locator("iframe")).toHaveAttribute(
+  await expect(page.locator(".preview-container iframe")).toHaveAttribute(
     "sandbox",
     "allow-scripts allow-pointer-lock",
   );
-  const frame = page.frameLocator("iframe");
+  const frame = page.frameLocator(".preview-container iframe");
   await expect(frame.getByText("Parent isolated")).toBeVisible();
   await frame.getByRole("button", { name: "Count: 0" }).click();
   await expect(frame.getByRole("button")).toHaveText("Count: 1");
@@ -128,7 +129,9 @@ for (const { name, mode, blocked } of [
     );
     await openControl(page, `${mode}/index.html`);
     await failure;
-    await expect(page.frameLocator("iframe").locator("#isolation")).toBeEmpty();
+    await expect(
+      page.frameLocator(".preview-container iframe").locator("#isolation"),
+    ).toBeEmpty();
     expect(requested.includes(`${controls}/${mode}/counter.mjs`)).toBe(
       blocked === "counter.mjs",
     );
@@ -147,7 +150,135 @@ test("sandbox rejects a dependency with a non-JavaScript MIME type", async ({
   );
   await openControl(page, "mime/index.html");
   await failure;
-  await expect(page.frameLocator("iframe").locator("#isolation")).toBeEmpty();
+  await expect(
+    page.frameLocator(".preview-container iframe").locator("#isolation"),
+  ).toBeEmpty();
+});
+
+test("comments follow the implementation, language, and theme", async ({
+  page,
+}) => {
+  const widget = () =>
+    page.locator(".giscus iframe").evaluateAll((frames) =>
+      frames.map((frame) => {
+        const url = new URL(frame.getAttribute("src")!);
+        return {
+          lang: url.pathname,
+          term: url.searchParams.get("term"),
+          theme: url.searchParams.get("theme"),
+          mapping: [
+            url.searchParams.get("strict"),
+            url.searchParams.get("inputPosition"),
+            frame.getAttribute("loading"),
+          ],
+        };
+      }),
+    );
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto(preview.replace("/en/", "/zh/"));
+  await expect(page.locator(".comments h2")).toHaveText("评论");
+  const config = await page
+    .locator('script[src="https://giscus.app/client.js"]')
+    .evaluate((script) => ({ ...(script as HTMLScriptElement).dataset }));
+  expect(config).toMatchObject({
+    repo: "scarletkc/variora",
+    repoId: "R_kgDOUksvGg",
+    category: "Announcements",
+    categoryId: "DIC_kwDOUksvGs4DGKRY",
+    mapping: "specific",
+    reactionsEnabled: "1",
+    emitMetadata: "0",
+  });
+  await expect(page.locator(".giscus iframe")).toHaveCount(1);
+  expect(await widget()).toEqual([
+    {
+      lang: "/zh-CN/widget",
+      term: "rainy-ramen/e2e-fixture",
+      theme: "transparent_dark",
+      mapping: ["1", "top", "lazy"],
+    },
+  ]);
+  // A query-only navigation keeps Preview mounted; the discussion must follow.
+  await page.evaluate(() =>
+    history.pushState(
+      null,
+      "",
+      "/zh/preview/?project=neon-serpent&model=e2e-fixture",
+    ),
+  );
+  await expect(page.locator("h1")).toHaveText("E2E fixture");
+  await expect(page.locator(".giscus iframe")).toHaveAttribute(
+    "src",
+    /term=neon-serpent%2Fe2e-fixture&/,
+  );
+  await page.evaluate(() =>
+    history.pushState(
+      null,
+      "",
+      "/zh/preview/?project=neon-serpent&model=e2e-fixture-2",
+    ),
+  );
+  await expect(page.locator(".giscus iframe")).toHaveAttribute(
+    "src",
+    /term=neon-serpent%2Fe2e-fixture-2&/,
+  );
+  await expect(page.locator(".giscus iframe")).toHaveCount(1);
+  await expect(page.locator('script[src^="https://giscus.app/"]')).toHaveCount(
+    1,
+  );
+  await page.locator(".comments").scrollIntoViewIfNeeded();
+  await expect(
+    page.frameLocator(".giscus iframe").locator("html"),
+  ).toHaveAttribute("data-theme", "transparent_dark");
+  await page.getByLabel("外观").click();
+  await page.getByRole("option", { name: "亮色" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.locator(".comments").scrollIntoViewIfNeeded();
+  await expect(
+    page.frameLocator(".giscus iframe").locator("html"),
+  ).toHaveAttribute("data-theme", "light");
+  await page.getByLabel("语言").click();
+  await page.getByRole("option", { name: "EN", exact: true }).click();
+  await expect(page.locator(".comments h2")).toHaveText("Comments");
+  await expect.poll(widget).toEqual([
+    {
+      lang: "/en/widget",
+      term: "neon-serpent/e2e-fixture-2",
+      theme: "light",
+      mapping: ["1", "top", "lazy"],
+    },
+  ]);
+});
+
+test("comments receive the current theme when the widget loads late", async ({
+  page,
+}) => {
+  let release!: () => void;
+  const ready = new Promise<void>((resolve) => (release = resolve));
+  await page.route(/https:\/\/giscus\.app\/[\w-]+\/widget\?/, async (route) => {
+    await ready;
+    await route.fallback();
+  });
+  try {
+    await page.emulateMedia({ colorScheme: "dark" });
+    // The widget intentionally remains pending, so do not wait for page load.
+    await page.goto(preview, { waitUntil: "domcontentloaded" });
+    await expect(page.locator(".giscus iframe")).toHaveAttribute(
+      "src",
+      /theme=transparent_dark/,
+    );
+    await page.getByLabel("Appearance").click();
+    await page.getByRole("option", { name: "Light" }).click();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+    release();
+    await page.locator(".comments").scrollIntoViewIfNeeded();
+    await expect(
+      page.frameLocator(".giscus iframe").locator("html"),
+    ).toHaveAttribute("data-theme", "light");
+  } finally {
+    release();
+    await page.unrouteAll({ behavior: "wait" });
+  }
 });
 
 test("self-contained classic scripts run in the sandbox without CORS headers", async ({
@@ -155,7 +286,7 @@ test("self-contained classic scripts run in the sandbox without CORS headers", a
 }) => {
   await page.goto(preview);
   await openControl(page, "none/classic.html");
-  await expect(page.frameLocator("iframe").locator("#ready")).toHaveText(
-    "Ready",
-  );
+  await expect(
+    page.frameLocator(".preview-container iframe").locator("#ready"),
+  ).toHaveText("Ready");
 });

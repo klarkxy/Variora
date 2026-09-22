@@ -1,6 +1,17 @@
 name: Website
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      [
+        "site/**",
+        "package.json",
+        "package-lock.json",
+        ".gitattributes",
+        ".prettierignore",
+        ".github/workflows/pages.yml",
+      ]
   push:
     branches: [main]
     paths:
@@ -19,12 +30,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: website-${{ github.event_name }}-${{ github.ref }}
+  group: website-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       NEXT_TELEMETRY_DISABLED: "1"
@@ -39,7 +50,7 @@ jobs:
       - name: Select checks
         id: changes
         env:
-          BEFORE_SHA: ${{ github.event.before }}
+          BEFORE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: node site/scripts/ci-changes.mjs
       - name: Cache Next.js builds
         uses: actions/cache@v6
@@ -61,6 +72,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/upload-pages-artifact@v5
+        if: github.ref == 'refs/heads/main'
         with:
           path: site/out
   deploy:

@@ -61,6 +61,7 @@ const en = {
   pageNotFound: "Page not found.",
   loading: "Loading preview…",
   fullscreenError: "Full screen is unavailable in this browser.",
+  comments: "Comments",
 };
 export type Messages = typeof en;
 
@@ -116,6 +117,7 @@ export const messages: Record<Locale, Messages> = {
     pageNotFound: "页面不存在。",
     loading: "正在加载预览…",
     fullscreenError: "此浏览器暂不支持全屏。",
+    comments: "评论",
   },
   ja: {
     projects: "プロジェクト",
@@ -168,6 +170,7 @@ export const messages: Record<Locale, Messages> = {
     pageNotFound: "ページが見つかりません。",
     loading: "プレビューを読み込み中…",
     fullscreenError: "このブラウザーでは全画面表示を利用できません。",
+    comments: "コメント",
   },
   ko: {
     projects: "프로젝트",
@@ -220,5 +223,6 @@ export const messages: Record<Locale, Messages> = {
     pageNotFound: "페이지를 찾을 수 없습니다.",
     loading: "미리보기를 불러오는 중…",
     fullscreenError: "이 브라우저에서는 전체 화면을 사용할 수 없습니다.",
+    comments: "댓글",
   },
 };

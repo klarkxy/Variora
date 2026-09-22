@@ -18,7 +18,7 @@ export function selectBrowserTests(
     }),
 ) {
   if (
-    event !== "push" ||
+    !["push", "pull_request"].includes(event) ||
     !/^[a-f0-9]{40}$/.test(before ?? "") ||
     /^0+$/.test(before) ||
     !/^[a-f0-9]{40}$/.test(after ?? "")
@@ -30,7 +30,7 @@ export function selectBrowserTests(
     } catch {
       git(["fetch", "--no-tags", "--depth=1", "origin", before]);
     }
-    // Include both paths of renames and all commits in the push.
+    // Include both paths of renames and all changes in the push or PR merge.
     const files = git([
       "diff",
       "--name-only",

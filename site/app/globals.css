@@ -688,6 +688,19 @@ svg {
   border: 0;
   background: #fff;
 }
+.comments {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.comments h2 {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  margin-bottom: 28px;
+}
+.comments .giscus {
+  min-height: 220px;
+}
 .entry-page {
   min-height: 100vh;
   display: flex;
@@ -879,6 +892,14 @@ svg {
   .preview-toolbar button {
     font-size: 10px;
     padding: 6px;
+  }
+  .comments {
+    margin-top: 40px;
+    padding-top: 30px;
+  }
+  .comments h2 {
+    font-size: 20px;
+    margin-bottom: 22px;
   }
   .entry-page h1 {
     font-size: 40px;

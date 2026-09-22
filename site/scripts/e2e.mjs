@@ -45,6 +45,16 @@ try {
     path.join(model, "app/classic.js"),
     'document.querySelector("#ready").textContent="Ready"',
   );
+  await cp(model, path.join(temp, "projects/neon-serpent/models/e2e-fixture"), {
+    recursive: true,
+  });
+  await cp(
+    model,
+    path.join(temp, "projects/neon-serpent/models/e2e-fixture-2"),
+    {
+      recursive: true,
+    },
+  );
   const env = {
     ...process.env,
     VARIORA_PROJECTS_DIR: path.join(temp, "projects"),

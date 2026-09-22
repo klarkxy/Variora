@@ -79,6 +79,49 @@ test("compares the whole push and disables rename folding", () => {
   ]);
 });
 
+test("PR checks compare the base with the tested merge and retain mixed changes", () => {
+  const before = "a".repeat(40),
+    after = "b".repeat(40);
+  for (const [files, expected] of [
+    ["site/README.md\0", false],
+    ["site/README.md\0site/components/comments.tsx\0", true],
+    ["site/README.md\0package-lock.json\0", true],
+  ]) {
+    const calls = [];
+    const git = (args) => {
+      calls.push(args);
+      return args[0] === "diff" ? files : "";
+    };
+    assert.equal(
+      selectBrowserTests({ event: "pull_request", before, after }, git),
+      expected,
+    );
+    assert.deepEqual(calls[1], [
+      "diff",
+      "--name-only",
+      "--no-renames",
+      "-z",
+      before,
+      after,
+      "--",
+    ]);
+  }
+});
+
+test("PRs with missing or unavailable comparison commits run full checks", () => {
+  const git = () => {
+    throw new Error("Unavailable base");
+  };
+  assert.equal(selectBrowserTests({ event: "pull_request" }, git), true);
+  assert.equal(
+    selectBrowserTests(
+      { event: "pull_request", before: "a".repeat(40), after: "b".repeat(40) },
+      git,
+    ),
+    true,
+  );
+});
+
 test("shallow checkouts fetch the previous commit and failures retain full checks", () => {
   const input = {
     event: "push",
